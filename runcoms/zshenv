@@ -9,3 +9,12 @@
 if [[ ( "$SHLVL" -eq 1 && ! -o LOGIN || -z "${TMPDIR}" ) && -s "${ZDOTDIR:-$HOME}/.zprofile" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprofile"
 fi
+
+if [[ "$OSTYPE" == linux* ]]; then
+  export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
+  export SSH_ASKPASS="/usr/bin/ksshaskpass"
+
+  export QT_LOGGING_TO_CONSOLE=1
+fi
+
+export CARGO_HOME="$HOME/.cargo"

@@ -11,3 +11,17 @@ if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
 fi
 
 # Customize to your needs...
+
+if [[ "$OSTYPE" == linux* ]]; then
+  alias open='xdg-open'
+  alias subl='subl3'
+  alias cp='cp --reflink=auto'
+fi
+
+alias gdb='gdb -quiet'
+
+export ZLE_REMOVE_SUFFIX_CHARS=$' \t\n;&|'
+export ZLE_SPACE_SUFFIX_CHARS=$'&|'
+
+bindkey "^[[5~" history-beginning-search-backward
+bindkey "^[[6~" history-beginning-search-forward
