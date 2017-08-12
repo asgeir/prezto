@@ -27,8 +27,6 @@ function prompt_mysteeef_precmd {
   if (( $+functions[python-info] )); then
     python-info
   fi
-
-  print -P "\n%{$(mysteeef_ssh_connection)$(mysteeef_user_prompt)"'${vcs_info_msg_0_}'""'$python_info[virtualenv]'" : %F{white}%~%f%}"
 }
 
 function mysteeef_ssh_connection() {
@@ -104,7 +102,9 @@ function prompt_mysteeef_setup {
   local ret_status="%(?:${_prompt_mysteeef_colors[5]}:${_prompt_mysteeef_colors[4]})%?%f"
 
   # Define prompts.
-  PROMPT="[${ret_status}] %# "
+  PROMPT="
+%{$(mysteeef_ssh_connection)$(mysteeef_user_prompt)"'${vcs_info_msg_0_}'""'$python_info[virtualenv]'" : %F{white}%~%f%}
+[${ret_status}] %# "
   RPROMPT=''
 }
 
