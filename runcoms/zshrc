@@ -25,3 +25,7 @@ export ZLE_SPACE_SUFFIX_CHARS=$'&|'
 
 bindkey "^[[5~" history-beginning-search-backward
 bindkey "^[[6~" history-beginning-search-forward
+
+if [[ "$OSTYPE" == linux* && -f /etc/grc.zsh ]]; then
+  . /etc/grc.zsh
+fi
