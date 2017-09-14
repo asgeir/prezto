@@ -14,7 +14,6 @@ fi
 
 if [[ "$OSTYPE" == linux* ]]; then
   alias open='xdg-open'
-  alias subl='subl3'
   alias cp='cp --reflink=auto'
 fi
 
