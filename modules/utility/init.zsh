@@ -45,19 +45,6 @@ alias rsync='noglob noremoteglob rsync'
 alias scp='noglob noremoteglob scp'
 alias sftp='noglob sftp'
 
-# Define general aliases.
-alias _='sudo'
-alias b='${(z)BROWSER}'
-
-alias diffu="diff --unified"
-alias e='${(z)VISUAL:-${(z)EDITOR}}'
-alias mkdir="${aliases[mkdir]:-mkdir} -p"
-alias p='${(z)PAGER}'
-alias po='popd'
-alias pu='pushd'
-alias sa='alias | grep -i'
-alias type='type -a'
-
 # Safe ops. Ask the user before doing anything destructive.
 alias rmi="${aliases[rm]:-rm} -i"
 alias mvi="${aliases[mv]:-mv} -i"
@@ -101,53 +88,12 @@ else
   fi
 fi
 
-alias l='ls -1A'         # Lists in one column, hidden files.
-alias ll='ls -lh'        # Lists human readable sizes.
-alias lr='ll -R'         # Lists human readable sizes, recursively.
-alias la='ll -A'         # Lists human readable sizes, hidden files.
-alias lm='la | "$PAGER"' # Lists human readable sizes, hidden files through pager.
-alias lx='ll -XB'        # Lists sorted by extension (GNU only).
-alias lk='ll -Sr'        # Lists sorted by size, largest last.
-alias lt='ll -tr'        # Lists sorted by date, most recent last.
-alias lc='lt -c'         # Lists sorted by date, most recent last, shows change time.
-alias lu='lt -u'         # Lists sorted by date, most recent last, shows access time.
-alias sl='ls'            # I often screw this up.
-
 # Grep
 if zstyle -t ':prezto:module:utility:grep' color; then
   export GREP_COLOR='37;45'           # BSD.
   export GREP_COLORS="mt=$GREP_COLOR" # GNU.
 
   alias grep="${aliases[grep]:-grep} --color=auto"
-fi
-
-# Mac OS X Everywhere
-if [[ "$OSTYPE" == darwin* ]]; then
-  alias o='open'
-elif [[ "$OSTYPE" == cygwin* ]]; then
-  alias o='cygstart'
-  alias pbcopy='tee > /dev/clipboard'
-  alias pbpaste='cat /dev/clipboard'
-else
-  alias o='xdg-open'
-
-  if (( $+commands[xclip] )); then
-    alias pbcopy='xclip -selection clipboard -in'
-    alias pbpaste='xclip -selection clipboard -out'
-  elif (( $+commands[xsel] )); then
-    alias pbcopy='xsel --clipboard --input'
-    alias pbpaste='xsel --clipboard --output'
-  fi
-fi
-
-alias pbc='pbcopy'
-alias pbp='pbpaste'
-
-# File Download
-if (( $+commands[curl] )); then
-  alias get='curl --continue-at - --location --progress-bar --remote-name --remote-time'
-elif (( $+commands[wget] )); then
-  alias get='wget --continue --progress=bar --timestamping'
 fi
 
 # Resource Usage
@@ -159,61 +105,11 @@ fi
 
 alias du='du -kh'
 
-if [[ "$OSTYPE" == (darwin*|*bsd*) ]]; then
-  alias topc='top -o cpu'
-  alias topm='top -o vsize'
-else
-  alias topc='top -o %CPU'
-  alias topm='top -o %MEM'
-fi
-
 # Miscellaneous
-
-# Serves a directory via HTTP.
-if (( $+commands[python3] )); then
-  alias http-serve='python3 -m http.server'
-else
-  alias http-serve='python -m SimpleHTTPServer'
-fi
 
 #
 # Functions
 #
-
-# Makes a directory and changes to it.
-function mkdcd {
-  [[ -n "$1" ]] && mkdir -p "$1" && builtin cd "$1"
-}
-
-# Changes to a directory and lists its contents.
-function cdls {
-  builtin cd "$argv[-1]" && ls "${(@)argv[1,-2]}"
-}
-
-# Pushes an entry onto the directory stack and lists its contents.
-function pushdls {
-  builtin pushd "$argv[-1]" && ls "${(@)argv[1,-2]}"
-}
-
-# Pops an entry off the directory stack and lists its contents.
-function popdls {
-  builtin popd "$argv[-1]" && ls "${(@)argv[1,-2]}"
-}
-
-# Prints columns 1 2 3 ... n.
-function slit {
-  awk "{ print ${(j:,:):-\$${^@}} }"
-}
-
-# Finds files and executes a command on them.
-function find-exec {
-  find . -type f -iname "*${1:-}*" -exec "${2:-file}" '{}' \;
-}
-
-# Displays user owned processes status.
-function psu {
-  ps -U "${1:-$LOGNAME}" -o 'pid,%cpu,%mem,command' "${(@)argv[2,-1]}"
-}
 
 # Enables globbing selectively on path arguments.
 # Globbing is enabled on local paths (starting in '/' and './') and disabled
