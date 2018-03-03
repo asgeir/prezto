@@ -51,8 +51,17 @@ typeset -gU cdpath fpath mailpath path
 path=(
   /usr/local/{bin,sbin}
   $HOME/.cargo/bin
+  $HOME/.local/bin
   $path
 )
+
+if [[ "$OSTYPE" == darwin* ]]; then
+  path=(
+    $path
+    $HOME/Library/Python/2.7/bin
+    $HOME/Library/Python/3.6/bin
+  )
+fi
 
 #
 # Less
