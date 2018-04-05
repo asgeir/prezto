@@ -77,6 +77,8 @@ export LESS='-g -i -M -R -S'
 
 # Set the Less input preprocessor.
 # Try both `lesspipe` and `lesspipe.sh` as either might exist on a system.
-if (( $#commands[(i)lesspipe(|.sh)] )); then
-  export LESSOPEN="| /usr/bin/env $commands[(i)lesspipe(|.sh)] %s 2>&-"
+if (( $#commands[(i)lesspipe.sh] )); then
+  export LESSOPEN="| /usr/bin/env $commands[(i)lesspipe.sh] %s 2>&-"
+elif (( $#commands[(i)lesspipe] )); then
+  export LESSOPEN="| /usr/bin/env $commands[(i)lesspipe] %s 2>&-"
 fi
