@@ -29,3 +29,7 @@ export ZLE_SPACE_SUFFIX_CHARS=$'&|'
 
 bindkey "^[[5~" history-beginning-search-backward
 bindkey "^[[6~" history-beginning-search-forward
+
+# Shortcut to toggle local history
+bindkey -M emacs "^L" set-local-history
+bindkey -M viins "^L" set-local-history
