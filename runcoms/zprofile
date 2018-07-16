@@ -19,7 +19,7 @@ fi
 
 if [[ "$OSTYPE" == darwin* ]]; then
   export EDITOR='vim'
-  export VISUAL='mvim -f'
+  export VISUAL='vimr -f'
 else
   export EDITOR='vim'
   export VISUAL='gvim -f'
@@ -58,8 +58,10 @@ path=(
 if [[ "$OSTYPE" == darwin* ]]; then
   path=(
     $path
+    $HOME/bin
     $HOME/Library/Python/2.7/bin
-    $HOME/Library/Python/3.6/bin
+    $HOME/Library/Python/3.7/bin
+    $HOME/.gem/ruby/2.3.0/bin
   )
 fi
 
