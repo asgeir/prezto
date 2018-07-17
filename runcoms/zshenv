@@ -11,8 +11,12 @@ if [[ ( "$SHLVL" -eq 1 && ! -o LOGIN ) && -s "${ZDOTDIR:-$HOME}/.zprofile" ]]; t
 fi
 
 if [[ "$OSTYPE" == linux* ]]; then
-  export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
-  export SSH_ASKPASS="/usr/bin/ksshaskpass"
+  if [[ -z "${SSH_AUTH_SOCK}" ]]; then
+    export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
+  fi
+  if [[ -z "${SSH_ASKPASS}" ]]; then
+    export SSH_ASKPASS="/usr/bin/ksshaskpass"
+  fi
 
   export QT_LOGGING_TO_CONSOLE=1
 fi
