@@ -21,8 +21,8 @@ if [[ "$OSTYPE" == darwin* ]]; then
   export EDITOR='vim'
   export VISUAL='vimr -f'
 else
-  export EDITOR='vim'
-  export VISUAL='gvim -f'
+  export EDITOR='nvim'
+  export VISUAL='knvim'
 fi
 
 export PAGER='less'
