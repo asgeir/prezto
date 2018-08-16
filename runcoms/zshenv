@@ -18,7 +18,7 @@ if [[ "$OSTYPE" == linux* ]]; then
     export SSH_ASKPASS="/usr/bin/ksshaskpass"
   fi
 
-  export QT_LOGGING_TO_CONSOLE=1
+  export QT_ASSUME_STDERR_HAS_CONSOLE=1
 fi
 
 export CARGO_HOME="$HOME/.cargo"
